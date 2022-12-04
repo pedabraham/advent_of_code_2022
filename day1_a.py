@@ -1,5 +1,5 @@
 calories_list = None
-with open('/Users/pedroam/advent_of_code_2022/input.txt','r') as file:
+with open('input.txt','r') as file:
     calories_list = file.readlines()
 print(calories_list[0].strip())
 print(calories_list[0])

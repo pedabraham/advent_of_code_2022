@@ -2,7 +2,7 @@ from re import A
 
 
 plan = None
-with open('/Users/pedroam/advent_of_code_2022/input-2.txt','r') as file:
+with open('input-2.txt','r') as file:
     plan = file.readlines()
 
 def get_points(adversary,mine):

@@ -1,6 +1,6 @@
 
 input = None
-with open('/Users/pedroam/advent_of_code_2022/input-3.txt','r') as file:
+with open('input-3.txt','r') as file:
     input = file.readlines()
 
 def get_priority(rucksack):
@@ -44,12 +44,8 @@ example = [
 
 def get_priority2(rucksack1,rucksack2,rucksack3):
     priority = None
-    comparment_1 = set()
-    for element in rucksack1:
-        comparment_1.add(element)
-    comparment_2 = set()
-    for element in rucksack2:
-        comparment_2.add(element)
+    comparment_1 = set(rucksack1)
+    comparment_2 = set(rucksack2)
     for element in rucksack3:
         if element in comparment_2 and element in comparment_1:
             priority = element
@@ -67,4 +63,4 @@ def compute_2(rucksack_list):
         total_points += points
     return total_points
 
-print(compute_2(example))
+print(compute_2(input))
