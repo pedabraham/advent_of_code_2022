@@ -19,6 +19,10 @@ def get_rules(notes):
         if note_parts[0] == 'Operation:':
             sign = note_parts[-2]
             value = note_parts[-1]
+            if value != 'old':
+                value = int(value)
+            else:
+                value = None
             monkeys[current_monkey]['operation'] = {'sign':sign,'value':value}
         if note_parts[0] == 'Test:':
             monkeys[current_monkey]['test_op'] = int(note_parts[-1])
@@ -39,31 +43,26 @@ def process_monkeys(monkeys,relif):
         test_op = rules['test_op']
         true_case = rules['true']
         false_case = rules['false']
-        items_to_process = new_items + items_back
-        for item_back in items_to_process:
+        for item_back in items_back:
             worry_level = get_worry_lavel(operation_sign,operation_value,item_back)
             if relif:
                 worry_level = int(worry_level/3)
+            else:
+                worry_level = worry_level % (13*19*5*2*17*11*7*3)
             if worry_level % test_op == 0:
                 trow_monkey = monkeys[true_case]
-                monkeys[true_case]['new_items'].append(worry_level)
+                monkeys[true_case]['items'].append(worry_level)
             else:
                 trow_monkey = monkeys[false_case]
-                monkeys[false_case]['new_items'].append(worry_level)
-        rules['inspected'] += len(items_to_process)
-        if new_items:
-            #rules['items'] = []
-            rules['new_items'] = []
-
-    for monkey, rules in monkeys.items():
-        rules['items'] = rules['new_items']
-        rules['new_items'] = []
+                monkeys[false_case]['items'].append(worry_level)
+        rules['inspected'] += len(items_back)
+        rules['items'] = []
 
 def get_worry_lavel(operation_sign,operation_value,current_value):
-    if operation_value == 'old':
+    if not operation_value :
         operation_value = current_value
     else:
-        operation_value = int(operation_value)
+        operation_value = operation_value
 
     if operation_sign == '+':
         return operation_value + current_value
