@@ -30,6 +30,19 @@ def read_lists(input_lists):
         lists_list.append(final_list[0])
     return lists_list
 
+
+def process_lists(lists):
+    n_lists = len(lists)
+    for i in range(0,n_lists,2):
+        list_1 = n_lists[i]
+        list_2 = n_lists[i+2]
+        right_order = compare(list_1,list_2)
+
+def compare(a,b):
+    if type(a) == int and type(b) == int:
+        pass
+    return True
+
 test_input = [
     '[[1],[2,3,48]]',
     '[1,1,5,1,1]',
