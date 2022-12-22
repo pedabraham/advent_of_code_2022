@@ -25,8 +25,9 @@ def gat_dict(monkeys):
 def get_number(key,look_up):
     data = look_up.get(key)
     number = data.get('number')
-    if key == 'humn':
-        return None
+    # only for part2
+    #if key == 'humn':
+    #    return None
     if number:
         return number
     else:
