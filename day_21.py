@@ -74,18 +74,6 @@ def print_eq(look_up, key,eq_q,temp_q):
         temp_q.pop()
         print(')')
 
-        #if not number_1 or not number_2:
-        #    return None
-        #if sign == '+':
-        #    number = number_1 + number_2
-        #elif sign == '-':
-        #    number = number_1 - number_2
-        #elif sign == '*':
-        #    number = number_1 * number_2
-        #elif sign == '/':
-        #    number = number_1 / number_2
-        #data['number'] = number
-        #return number
     return eq_q
 
 def process_eq(eq_q,match):
@@ -101,9 +89,11 @@ def process_eq(eq_q,match):
         part2 = operation[1]
         if isinstance(part1,str):
             number_1 = part2
-            number = part2
             sign = inverse_op.get(part1)
             number_2 = match
+            if part1 in {'+','*'}:
+                number_1 = match
+                number_2 = part2
         else:
             sign = inverse_op.get(part2)
             if part2 in {'-','/'}:
@@ -113,7 +103,6 @@ def process_eq(eq_q,match):
             else:
                 number_1 = match
                 number_2 = part1
-            number = part1
         
         
         if sign == '+':
@@ -124,6 +113,7 @@ def process_eq(eq_q,match):
             match = number_1 * number_2
         elif sign == '/':
             match = number_1 // number_2
+        print('o')
         
         
     return match
@@ -145,6 +135,19 @@ test_input = [
     'drzm: hmdt - zczc',
     'hmdt: 32',
 ]
+
+eq_2 = [
+    ['+',8],
+    [8,'+'],
+    ['-',8],
+    [8,'-'],
+    ['*',8],
+    [8,'*'],
+    ['/',8],
+    [8,'/'],
+]
+
+match = process_eq(eq_2,100)
 
 monkeys = gat_dict(test_input)
 number = get_number('sjmn',monkeys)
